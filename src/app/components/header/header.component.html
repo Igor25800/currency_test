@@ -1,0 +1,12 @@
+<header class="header">
+  <div class="course">
+    <div class="course-item">
+      <div class="course-item__title">Курс USD:</div>
+      <div class="course-item__value" data-value="USD">{{currencyUSD | async | currency: 'UAH': '₴'}}</div>
+    </div>
+    <div class="course-item">
+      <div class="course-item__title">Курс EUR:</div>
+      <div class="course-item__value" data-value="EUR">{{currencyEUR | async | currency: 'UAH': '₴'}}</div>
+    </div>
+  </div>
+</header>

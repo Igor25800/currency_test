@@ -1,0 +1,28 @@
+<div class="container">
+  <div class="conversion" [formGroup]="conversionForm">
+    <div class="conversion-block">
+      <div class="options">
+        <select class="select" formControlName="currency_one">
+          <option>Вибиреить валюту</option>
+          <option *ngFor="let currency of arrayCurrency" [value]="currency">{{currency}}</option>
+        </select>
+      </div>
+      <div class="text-field">
+        <label class="text-field__label">Отдаю:</label>
+        <input formControlName="from" class="text-field__input" type="number" name="login" placeholder="Currency" value="itchief">
+      </div>
+    </div>
+    <div class="conversion-block">
+      <div class="options">
+        <select class="select" formControlName="currency_two">
+          <option *ngFor="let currency of arrayCurrency"  [value]="currency">{{currency}}</option>
+        </select>
+      </div>
+      <div class="text-field">
+        <label class="text-field__label">Получаю:</label>
+        <input formControlName="to" class="text-field__input" type="number" name="login" placeholder="Currency" value="itchief">
+      </div>
+    </div>
+  </div>
+</div>
+

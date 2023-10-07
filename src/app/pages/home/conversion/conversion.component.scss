@@ -1,0 +1,20 @@
+.container {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  margin-top: 5rem;
+
+  .conversion {
+    width: 40%;
+    border: 1px solid rgba(0, 0, 0, 0.125);
+    padding: 1rem;
+    display: flex;
+    justify-content: space-between;
+
+    &-block {
+      width: 48%;
+    }
+  }
+}
+
+
