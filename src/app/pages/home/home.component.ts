@@ -1,7 +1,7 @@
 import {Component, DestroyRef, inject, OnInit} from '@angular/core';
 import {CurrencyService} from "../../shared/services/currency.service";
 import {Observable, pluck} from "rxjs";
-import {Currency, CurrencyInterface} from "../../shared/interfaces/currency.interface";
+import {CurrencyInterface} from "../../shared/interfaces/currency.interface";
 import {takeUntilDestroyed} from "@angular/core/rxjs-interop";
 
 @Component({
