@@ -1,8 +1,9 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, DestroyRef, inject, OnInit} from '@angular/core';
 import {CurrencyService} from "../../shared/services/currency.service";
 import {combineLatest, EMPTY, Observable, pluck, switchMap, tap} from "rxjs";
 import {Currency, CurrencyInterface} from "../../shared/interfaces/currency.interface";
 import {FormControl, FormGroup} from "@angular/forms";
+import {takeUntilDestroyed} from "@angular/core/rxjs-interop";
 
 @Component({
   selector: 'app-home',
@@ -17,6 +18,7 @@ export class HomeComponent implements OnInit {
   arraySelect!: Array<string>;
   conversionForm!: FormGroup;
   conversion_rates!: Currency;
+  private destroyRef = inject(DestroyRef);
 
   constructor(
     private currencyService: CurrencyService
@@ -32,7 +34,9 @@ export class HomeComponent implements OnInit {
   private _getCurrency(): void {
     this.currencyEUR = this.currencyService.getCurrencyEUR().pipe(pluck('conversion_rates', 'UAH'));
     this.currencyUSD = this.currencyService.getCurrencyUSD().pipe(pluck('conversion_rates', 'UAH'));
-    this.currencyService.getCurrency(this.country).subscribe((currency: CurrencyInterface) => {
+    this.currencyService.getCurrency(this.country).pipe(
+      takeUntilDestroyed(this.destroyRef),
+    ).subscribe((currency: CurrencyInterface) => {
       this.currency = currency;
       this.arraySelect = Object.keys(currency.conversion_rates);
     })
@@ -55,7 +59,9 @@ export class HomeComponent implements OnInit {
            return this._formControl(controlName, value);
           })
         )
-      })).subscribe();
+      })).pipe(
+      takeUntilDestroyed(this.destroyRef),
+    ).subscribe();
   }
 
   private _formControl( control: string, value: number | string ): Observable<CurrencyInterface> {
